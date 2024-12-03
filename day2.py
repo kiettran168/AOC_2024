@@ -1,4 +1,3 @@
-# First puzzle
 f = open("data/day2.txt", "r")
 
 def analyze(line):
@@ -23,13 +22,14 @@ safe = 0
 safe_ = 0
 unsafe = []
 
+# First puzzle
 for line in f:
     line.strip()
     line = [int(i) for i in line.split()]
     if analyze(line): safe += 1
     else:
         unsafe += [line]
-print(safe)
+print("Number of safe reports: ", safe)
 
 # Second puzzle
 for line in unsafe:
@@ -40,6 +40,6 @@ for line in unsafe:
         if analyze(line_):
             safe_ += 1
             break
-print(safe + safe_)
+print("Number of actual safe reports: ", safe + safe_)
 
 f.close()
