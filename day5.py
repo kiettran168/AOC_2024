@@ -33,10 +33,6 @@ for line in f:
 print("Middle page number total of correct updates: ", count)
 
 # Second puzzle
-# Thought I had to implement some kind of sort 
-# but I tried swapping around to see what would happen
-# and turns out just swapping around worked so...
-# weird...
 count_ = 0
 for seq in incorrect:
     for i in range(len(seq)):
