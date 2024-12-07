@@ -16,7 +16,7 @@ f = open("data/day7.txt", "r")
 #     return add or mul    
 
 def check(lhs, rhs):
-    if len(rhs) == 0:
+    if len(rhs) == 0 or lhs <= 0:
         return False
     if lhs == rhs[0]:
         return True
@@ -46,7 +46,7 @@ def check(lhs, rhs):
 #     return add or mul or comb
 
 def check_(lhs, rhs):
-    if len(rhs) == 0 or lhs <= 0 or lhs < rhs[-1]:
+    if len(rhs) == 0 or lhs <= 0:
         return False
     if len(rhs) == 1:
         if lhs == rhs[0]:
