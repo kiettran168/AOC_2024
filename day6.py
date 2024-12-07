@@ -19,6 +19,7 @@ direction = {0:(-1, 0), 1:(0, 1), 2:(1, 0), 3:(0, -1)}
 visited = []
 curr = 0
 visited.append((x,y))
+before = {}
 while check(x,y):
     i, j = direction[curr]
     if grid[x+i][y+j] == '#':
@@ -28,33 +29,30 @@ while check(x,y):
         y += j
         if (x,y) not in visited:
             visited.append((x,y))
+            before[(x,y)] = (x-i,y-j,curr)
 print("The guard visited: ", len(visited))
 
 # Second puzzle
-count = 0
-obs = set()
-for m, n in visited:    
+count = 0    
+reset = (sx,sy,0)
+for m, n in visited[1:]:
     if grid[m][n] != '^': 
         grid[m][n] = "#"
+    x, y, curr = before[(m,n)]
     visited_ = set()
-    curr = 0
-    x, y = sx, sy
-
     visited_.add((x,y,curr))
     while check(x,y):
         i, j = direction[curr]
         if grid[x+i][y+j] == '#':
             curr = (curr + 1) % 4
+            i, j = direction[curr]
+            if (x+i, y+j, curr) in visited_:
+                count += 1
+                break
         else:
             x += i
             y += j
-            if (x, y, curr) in visited_:
-                if (m, n) not in obs:
-                    obs.add((m, n))
-                    count += 1
-                    break
-            else:
-                visited_.add((x,y,curr))
+            visited_.add((x,y,curr))
             
     if grid[m][n] != '^': 
         grid[m][n] = "."
