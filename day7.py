@@ -21,7 +21,9 @@ def check(lhs, rhs):
     if lhs == rhs[0]:
         return True
     a = lhs - rhs[-1]
-    b = lhs / rhs[-1]
+    b = 0
+    if lhs % rhs[-1] == 0:
+        b = lhs // rhs[-1]
     return check(a, rhs[:-1]) or check(b, rhs[:-1])
 
 # Second puzzle
