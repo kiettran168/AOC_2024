@@ -17,12 +17,13 @@ for r, line in enumerate(grid):
         else:
             tails.append((r, c))
 
+direction = [(1,0), (-1,0), (0,1), (0,-1)]
 for tail in tails:
-    queue = [tail]
+    stack = [tail]
     visited = set()
-    while len(queue) > 0:
-        x, y = queue[0]
-        queue.pop(0)
+    while len(stack) > 0:
+        x, y = stack[-1]
+        stack.pop()
         if grid[x][y] == 0:
             # First puzzle
             if (x,y) not in visited:
@@ -31,14 +32,9 @@ for tail in tails:
             # Second puzzle
             heads[(x,y)][1] += 1
         else:
-            if grid[x-1][y] == grid[x][y] - 1:
-                queue.append((x-1,y))
-            if grid[x+1][y] == grid[x][y] - 1:
-                queue.append((x+1,y))
-            if grid[x][y-1] == grid[x][y] - 1:
-                queue.append((x,y-1))
-            if grid[x][y+1] == grid[x][y] - 1:
-                queue.append((x,y+1))
+            for i, j in direction:
+                if grid[x+i][y+j] == grid[x][y] - 1:
+                    stack.append((x+i,y+j))
     
 count = 0
 count_ = 0
