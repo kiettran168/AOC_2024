@@ -3,11 +3,9 @@ import copy
 f = open("data/day11.txt", "r")
 
 stones = {}
-count = 0
 for line in f:
     for s in [int(i) for i in line.strip().split()]:
         stones[s] = 1
-        count += 1
 
 # First puzzle
 # Second puzzle
@@ -22,7 +20,6 @@ while n < 75:
             else:
                 queue[1] = loads
         elif len(str(s)) % 2 == 0:
-            count += 1
             l = len(str(s)) // 2
             left = int(str(s)[:l])
             right = int(str(s)[l:])
