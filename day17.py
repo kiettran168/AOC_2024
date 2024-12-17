@@ -1,5 +1,4 @@
 import re
-import time
 f = open("data/day17.txt", "r")
 
 instr = []
@@ -57,10 +56,10 @@ def interpret(A, B, C):
             C = A // (2**operand)
         pointer += 2
 
-    return ','.join([str(i) for i in output])
+    return output
 
 # First puzzle
-print("Output: ", interpret(A,B,C))
+print("Output: ", ','.join([str(i) for i in interpret(A,B,C)]))
 
 # Second puzzle
 prev_ = [0]
@@ -70,7 +69,7 @@ for x in range(16):
     for p in prev:
         for n in range(8):
             A = p*8+n
-            if interpret(A,B,C) == ','.join([str(i) for i in instr[(15-x):]]):
+            if interpret(A,B,C) == instr[(15-x):]:
                 prev_.append(A)
 print("RegA: ", min(prev_))
 
